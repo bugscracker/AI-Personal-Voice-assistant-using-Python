@@ -1,144 +1,81 @@
-# AI_Personal_Voice_Assistant_Using_Python
+	import pyttsx3
+	import datetime
+	import speech_recognition as sr
+	import webbrowser
+	import os
+	import random
 
-A project to build an AI voice assistant using Python . The Voice assistant interacts with the humans to perform basic tasks.
+	def take_cmd():
+    		r = sr.Recognizer()
+    		with sr.Microphone() as source:
+        		print("Listening...")
+        		#r.pause_threshold = 1
+        		audio = r.listen(source)
+    		try:
+        		print("Recognizing the voice...")
+        		query = r.recognize_google(audio, language='en-in')
+        
+        		if 'open google' in query:
+            			webbrowser.open("google.com")
 
+        		elif 'open youtube' in query:
+            			webbrowser.open("youtube.com")
 
-### About G-One :
+        		elif 'open whatsapp' in query:
+            			webbrowser.open("web.whatsapp.com")
 
-![AI FINAL](https://user-images.githubusercontent.com/51138087/93668051-f7c4af00-fa3e-11ea-9b17-5913e954795f.png)
+        		elif 'open github' in query:
+            			webbrowser.open("github.com")
 
+        		elif 'open Google Classroom' in query:
+            			webbrowser.open("classroom.google.com/u/0/h")
 
-G-One is an AI personal voice assistant service built using Pychram. It can understand human speech and perform basic task designed by the client.
+        		elif 'Google Classroom' in query:
+            			webbrowser.open("classroom.google.com/u/0/h")
 
-When the user specify the appropriate trigger words , The G-One gets activated and executes the user commands.
+       	 		elif 'who are you' in query:
+            			speak("I am your personal assistant, soofia....")
+        
+        		elif 'play music' in query:
+            			music_dir = 'C:\\Users\\bugscracker\\Music'
+            			songs = os.listdir(music_dir)
+            			# print(songs)
+            			n = random.randint(1, 26)
+            			os.startfile(os.path.join(music_dir, songs[n]))
+        
+        		elif 'time please' in query:
+            			strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            			print(strTime)
+            			speak(f"Rajkumar, the time is {strTime}")
 
+        		elif 'open notepad' in query:
+            			codePath = "C:\\WINDOWS\\system32\\notepad.exe"
+            			os.startfile(codePath)
 
-G-One AI Voice assistant:"Loading your personal Assistant G-One....
-                          Hello, Good Morning" (Greets the user according to time)
+       		 	elif 'open crome' in query:
+            			codePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+            			os.startfile(codePath)
 
+        		elif 'open code' in query:
+            			codePath = "C:\\Program Files\\Microsoft VS Code\\Code.exe"
+            			os.startfile(codePath)
 
+		        elif 'open pycharm' in query:
+            			codePath = "C:\\Program Files\\JetBrains\\PyCharm 2019.2.4\\bin\\pycharm64.exe"
+            			os.startfile(codePath)
+        
+        		elif 'wikipedia' in query:  # if wikipedia found in the query then this block will be executed
+            			speak('Searching Wikipedia...')
+           	 		query = query.replace("wikipedia", "")
+           			results = wikipedia.summary(query, sentences=2)
+            			speak("According to Wikipedia")
+            			print(results)
+            			speak(results)
 
-### The implemented Voice assistant can perform the following tasks:
-
-
-1. Opens a wepage : Youtube , G-Mail , Google Chrome , StackOverflow 
-	
-	
-		Human : Hey G-One, Open Youtube
-		
-		
-2. Predicts time 
-	
-	
-		Human : Hey G-One , What is the time
-		
-		
-3.Fetch Top headlines from Times of India
-	
-         
-		Human:Hey G-One , what's the latest news?
-		
-		
-4. Captures a photo
-	
-  		
-		Human:Hey G-One, Take a photo
-		
-		
-5. Searches data from web
-	
-   		
-		Human: Hey G-One, Search Butterfly images from web
-		
-		
-6. Ask geographical and computational questions
-	
-  	 	
-		Human: Hey G-One, What is the capital of California? / Hey G-One what is Sin 90?
-		
-		
-7. Predict Weather of different Cities
-   		
-	
-		Human: Hey G-One , What is the weather likely now in Kerala?
-		
-	
-8. Abstarct necessary information from wikipedia
-	
-   		
-		Human: Hey G-One , Who is Bill Gates according to Wikipedia
-		
-		
-   The voice assistant abstarcts first 3 lines of wikipedia and gives the information to the user.
-	
-	
-9. Ask G-One about what task it can perform and who created it
-	
-   		
-	  	Human: Hey G-One, Who created you? / Hey G-One , What can you do
-		
-		
-10.Turn off your pc when required
-   		
-
-   		 Human: Hey G-One , Please turn off my PC
-
-
-
-### Libraries required to be installed using Pip Command:
-	
-	1.Json
-	
-	2.request
-	
-	3.Speech recognition
-	
- 	4.Pyttsx3
-	
-	5.Wikipedia
-	
-	6.Ecapture
-	
-	7.time
-	
-	8.Wolfram Alpha
-
-
-### In-Built libraries required to be imported:
-
-	1.os
-	
-	2.datetime
-	
-	3.web browser
-	
-	4.subprocess
-
-
-
-G-One uses Third party API's to predict weather in different cities and to ask computational and geographical questions. 
-Free API keys can be generated by creating an account in the following applications.  
-	
-	Open Weather Map - To forecast weather
-	
-	WolframAlpha - To answer questions
-	
-
-
-
-### Check out my blog now :	
-
-A blog on "How to build your Own AI voice assistant using Python" is published on Towards Data science.
-
-[https://link.medium.com/RNuKoCjPO8](url)
-
-<p align="left">
-  <a href="https://medium.com/@mmirthula02" target="_blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/medium.svg" alt="kushalbhanot" height="60" width="45" /></a> &nbsp;&nbsp;
-</p>
-
-
-
-Happy reading:)
-
-
-
+    		except Exception as e:
+        		print(e)
+        		print("Say it clearly...")
+        		return "none"
+    		return query
+	while True:
+    		take_cmd()
